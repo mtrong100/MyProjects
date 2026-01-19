@@ -175,7 +175,7 @@ export function Home() {
                         </div>
 
                         {/* View Mode Toggle */}
-                        <div className="flex items-center gap-1 bg-background/50 p-1 rounded-xl border border-transparent">
+                        <div className="flex items-center gap-1 bg-background/50 p-1 rounded-xl border border-transparent overflow-hidden">
                             {[
                                 { mode: "grid", icon: LayoutGrid, label: t("view.grid") },
                                 { mode: "compact", icon: Grid, label: t("view.compact") },
@@ -184,11 +184,11 @@ export function Home() {
                                 <button
                                     key={item.mode}
                                     onClick={() => setViewMode(item.mode as ViewMode)}
-                                    className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg transition-all ${viewMode === item.mode ? "bg-primary text-primary-foreground shadow-sm" : "hover:bg-accent text-muted-foreground"}`}
+                                    className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg transition-all ${viewMode === item.mode ? "bg-primary text-primary-foreground shadow-sm" : "hover:bg-accent text-muted-foreground"}`}
                                     title={item.label}
                                 >
-                                    <item.icon size={16} />
-                                    <span className="text-[10px] font-black uppercase hidden xl:inline">{item.label}</span>
+                                    <item.icon size={16} className="shrink-0" />
+                                    <span className="text-[10px] font-black uppercase hidden sm:inline-block md:hidden 2xl:inline-block whitespace-nowrap">{item.label}</span>
                                 </button>
                             ))}
                         </div>

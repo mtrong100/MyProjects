@@ -1,0 +1,42 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="prism_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="50%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="accent_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <filter id="premium_glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12"/>
+      <feOffset dx="0" dy="8" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.4"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Hexagonal Prism Base -->
+  <path d="M256 60L420 155V357L256 452L92 357V155L256 60Z" fill="url(#prism_grad)" filter="url(#premium_glow)"/>
+  
+  <!-- Abstract "M" and "P" Geometry -->
+  <!-- The "M" part -->
+  <path d="M160 340V180L256 260L352 180V340" stroke="white" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- The "P" part integration -->
+  <path d="M352 260C380 260 400 240 400 210C400 180 380 160 352 160H310" stroke="url(#accent_grad)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/>
+  
+  <!-- Inner Highlight -->
+  <path d="M256 90L390 167V345L256 422L122 345V167L256 90Z" stroke="white" stroke-width="2" stroke-opacity="0.2" fill="none"/>
+
+  <!-- Center Floating Element (The "Idea" seed) -->
+  <circle cx="256" cy="120" r="12" fill="white">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" />
+  </circle>
+</svg>
