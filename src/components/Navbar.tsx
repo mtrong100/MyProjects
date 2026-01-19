@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageToggle } from "./LanguageToggle";
-import { LayoutGrid, BarChart3, Sparkles, Menu, X, ChevronRight } from "lucide-react";
+import { LayoutGrid, BarChart3, Menu, X, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -23,8 +23,8 @@ export function Navbar() {
             <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <Link to="/" className="flex items-center gap-3 shrink-0 group">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-indigo-600 flex items-center justify-center text-white shadow-xl shadow-primary/30 group-hover:rotate-12 transition-all duration-500">
-                            <Sparkles size={22} className="animate-pulse" />
+                        <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                            <img src="/favicon.png" alt="Logo" className="w-full h-full object-cover" />
                         </div>
                         <span className="font-black text-xl tracking-tight gradient-text">{t("app.title")}</span>
                     </Link>
@@ -89,8 +89,8 @@ export function Navbar() {
                         >
                             <div className="p-4 flex items-center justify-between border-b border-border">
                                 <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
-                                        <Sparkles size={18} />
+                                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
+                                        <img src="/favicon.png" alt="Logo" className="w-full h-full object-cover" />
                                     </div>
                                     <span className="font-black text-primary tracking-tight">{t("app.title")}</span>
                                 </div>
