@@ -15,8 +15,8 @@ export default defineConfig({
         name: 'MyProjects — Premium Portfolio Ecosystem',
         short_name: 'MyProjects',
         description: 'A curated gallery of high-performance web applications and digital experiments.',
-        theme_color: '#10b981',
-        background_color: '#fcfdfc',
+        theme_color: '#8b5cf6',
+        background_color: '#fdfaff',
         display: 'standalone',
         orientation: 'portrait',
         icons: [

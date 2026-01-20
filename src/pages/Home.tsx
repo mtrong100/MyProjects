@@ -4,7 +4,6 @@ import { ProjectCard } from "../components/ProjectCard";
 import { Search, ArrowUpDown, Filter, X, Grid, List as ListIcon, LayoutGrid, ArrowUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { SortField, SortOrder, ViewMode } from "../types/index";
-import { AnimatePresence, motion } from "framer-motion";
 
 export function Home() {
     const { t } = useTranslation();
@@ -85,18 +84,14 @@ export function Home() {
         <div className="space-y-12 pb-4">
             {/* Header Section */}
             <header className="text-center space-y-6 max-w-3xl mx-auto py-12">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
+                <div>
                     <h1 className="text-6xl md:text-8xl font-black tracking-tight leading-[1] mb-8">
                         {t("app.explore")} <span className="gradient-text">{t("app.masterpieces")}</span>
                     </h1>
                     <p className="text-muted-foreground text-xl md:text-2xl font-medium leading-relaxed max-w-3xl mx-auto">
                         {t("app.hero_text")}
                     </p>
-                </motion.div>
+                </div>
             </header>
 
             {/* Filter & Sort Controls (Non-sticky) */}
@@ -188,7 +183,6 @@ export function Home() {
                                     title={item.label}
                                 >
                                     <item.icon size={16} className="shrink-0" />
-                                    {/* <span className="text-[10px] font-black uppercase hidden sm:inline-block md:hidden 2xl:inline-block whitespace-nowrap">{item.label}</span> */}
                                 </button>
                             ))}
                         </div>
@@ -205,12 +199,9 @@ export function Home() {
             </div>
 
             {/* Results Grid/List */}
-            <AnimatePresence mode="popLayout">
+            <div>
                 {filteredProjects.length > 0 ? (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                    <div
                         className={
                             viewMode === "grid"
                                 ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
@@ -218,7 +209,6 @@ export function Home() {
                                     ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
                                     : "flex flex-col gap-6"
                         }
-                        layout
                     >
                         {filteredProjects.map((project) => (
                             <ProjectCard
@@ -227,9 +217,9 @@ export function Home() {
                                 variant={viewMode === "list" ? "list" : viewMode === "compact" ? "compact" : "grid"}
                             />
                         ))}
-                    </motion.div>
+                    </div>
                 ) : (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-32 text-center">
+                    <div className="py-32 text-center">
                         <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-accent text-accent-foreground mb-8">
                             <Search size={40} />
                         </div>
@@ -238,25 +228,20 @@ export function Home() {
                         <button onClick={() => { setSearch(""); setTechFilter("All"); setAssistanceFilter("All"); }} className="px-8 py-3 rounded-full bg-primary text-primary-foreground font-bold shadow-lg">
                             {t("empty.reset")}
                         </button>
-                    </motion.div>
+                    </div>
                 )}
-            </AnimatePresence>
+            </div>
 
             {/* Scroll to Top */}
-            <AnimatePresence>
-                {showScrollTop && (
-                    <motion.button
-                        initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.5, y: 20 }}
-                        onClick={scrollToTop}
-                        className="fixed bottom-8 right-8 z-[100] p-4 rounded-2xl bg-primary text-primary-foreground shadow-2xl shadow-primary/40 hover:scale-110 active:scale-95 transition-all"
-                        aria-label={t("scroll_top")}
-                    >
-                        <ArrowUp size={24} />
-                    </motion.button>
-                )}
-            </AnimatePresence>
+            {showScrollTop && (
+                <button
+                    onClick={scrollToTop}
+                    className="fixed bottom-8 right-8 z-[100] p-4 rounded-2xl bg-primary text-primary-foreground shadow-2xl shadow-primary/40 hover:scale-110 active:scale-95 transition-all"
+                    aria-label={t("scroll_top")}
+                >
+                    <ArrowUp size={24} />
+                </button>
+            )}
         </div>
     );
 }

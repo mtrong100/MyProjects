@@ -9,7 +9,7 @@ import { useTheme } from "../hooks/useTheme";
 import { motion } from "framer-motion";
 import { TrendingUp, Award, Layers, Ghost, Target } from "lucide-react";
 
-const COLORS = ['#10b981', '#34d399', '#059669', '#6ee7b7', '#047857', '#a7f3d0', '#065f46', '#10b981'];
+const COLORS = ['#8b5cf6', '#a78bfa', '#7c3aed', '#c084fc', '#6d28d9', '#e879f9', '#4c1d95', '#8b5cf6'];
 
 export function Analytics() {
     const { t } = useTranslation();
@@ -95,10 +95,10 @@ export function Analytics() {
             {/* Responsive Stats Grid */}
             <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 {[
-                    { label: t("analytics.total_artifacts"), value: projects.length, icon: Layers, color: "bg-emerald-500" },
-                    { label: t("analytics.top_tech"), value: techData[0]?.name || "N/A", icon: Award, color: "bg-teal-500" },
-                    { label: t("analytics.ai_collab"), value: assistanceData.length, icon: TrendingUp, color: "bg-green-500" },
-                    { label: t("analytics.velocity"), value: t("analytics.velocity_value"), icon: Ghost, color: "bg-emerald-600" },
+                    { label: t("analytics.total_artifacts"), value: projects.length, icon: Layers, color: "bg-violet-500" },
+                    { label: t("analytics.top_tech"), value: techData[0]?.name || "N/A", icon: Award, color: "bg-purple-500" },
+                    { label: t("analytics.ai_collab"), value: assistanceData.length, icon: TrendingUp, color: "bg-fuchsia-500" },
+                    { label: t("analytics.velocity"), value: t("analytics.velocity_value"), icon: Ghost, color: "bg-violet-600" },
                 ].map((stat, i) => (
                     <motion.div
                         key={stat.label}

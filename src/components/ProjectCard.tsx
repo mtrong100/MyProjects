@@ -1,7 +1,6 @@
 import { ExternalLink, Github, Sparkles, Layout, Cpu, Link } from "lucide-react";
 import type { Project } from "../types/index";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
 import { useToast } from "../context/ToastContext";
 
 interface ProjectCardProps {
@@ -21,13 +20,7 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
 
     if (variant === "compact") {
         return (
-            <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                whileHover={{ y: -4 }}
-                className="group relative flex flex-col rounded-xl border border-border bg-card overflow-hidden transition-all shadow-sm hover:shadow-md h-full"
-            >
+            <div className="group relative flex flex-col rounded-xl border border-border bg-card overflow-hidden transition-all shadow-sm hover:shadow-md h-full">
                 <div className="aspect-[16/10] overflow-hidden bg-muted relative">
                     {project.image ? (
                         <img src={project.image} alt={project.name} className="h-full w-full object-cover transition-transform group-hover:scale-105" />
@@ -54,18 +47,13 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
                         </div>
                     </div>
                 </div>
-            </motion.div>
+            </div>
         );
     }
 
     if (variant === "list") {
         return (
-            <motion.div
-                layout
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="group relative flex flex-col md:flex-row gap-6 p-4 rounded-2xl border border-border bg-card hover:bg-accent/5 transition-all shadow-sm hover:shadow-xl"
-            >
+            <div className="group relative flex flex-col md:flex-row gap-6 p-4 rounded-2xl border border-border bg-card hover:bg-accent/5 transition-all shadow-sm hover:shadow-xl">
                 <div className="w-full md:w-64 aspect-[16/10] overflow-hidden rounded-xl h-fit">
                     {project.image ? (
                         <img src={project.image} alt={project.name} className="h-full w-full object-cover" />
@@ -107,21 +95,13 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
                         )}
                     </div>
                 </div>
-            </motion.div>
+            </div>
         );
     }
 
     // Default Grid (Premium)
     return (
-        <motion.div
-            layout
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            whileHover={{ y: -8 }}
-            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-lg hover:shadow-2xl hover:shadow-primary/10 transition-all h-full"
-        >
+        <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-lg hover:shadow-2xl hover:shadow-primary/10 transition-all h-full">
             {/* Image Section */}
             <div className="aspect-video overflow-hidden bg-muted relative">
                 {project.image ? (
@@ -136,18 +116,6 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
                         <Layout size={48} className="opacity-20" />
                     </div>
                 )}
-
-                {/* Floating Tech Badge (First Tech) */}
-                {/* {techList[0] && (
-                    <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground backdrop-blur-md border border-white/20 text-[10px] font-black shadow-lg uppercase tracking-wider animate-pulse-soft">
-                        {techList[0]}
-                    </div>
-                )} */}
-
-                {/* Overlay on hover */}
-                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end p-4">
-                    <p className="text-white text-xs font-bold tracking-wide">{t("common.explore_more")}</p>
-                </div> */}
             </div>
 
             {/* Content Section */}
@@ -219,6 +187,6 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
                     )}
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 }
