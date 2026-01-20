@@ -1,8 +1,10 @@
 import React from "react";
 import { Navbar } from "./Navbar";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+    const { t } = useTranslation();
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />
@@ -16,15 +18,42 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     {children}
                 </motion.div>
             </main>
-            <footer className="border-t border-border py-8 bg-muted/30">
-                <div className="container mx-auto px-4 text-center">
-                    <div className="flex flex-col items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center bg-white dark:bg-black/20 shadow-sm border border-primary/10 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 p-1">
-                            <img src="/brand-logo.svg" alt="Logo" className="w-full h-full object-contain" />
+            <footer className="border-t border-border py-12 bg-muted/30">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start text-center md:text-left mb-12">
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-center md:justify-start gap-3">
+                                <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center bg-white shadow-md border border-primary/20 p-1">
+                                    <img src="/logo.svg" alt="Logo" className="w-full h-full object-contain" />
+                                </div>
+                                <span className="font-black text-xl tracking-tight gradient-text">{t("app.title")}</span>
+                            </div>
+                            <p className="text-sm max-w-xs mx-auto md:mx-0">
+                                {t("app.subtitle")}
+                            </p>
                         </div>
+                        <div className="space-y-4">
+                            <h4 className="font-bold text-foreground">{t("nav.home")}</h4>
+                            <ul className="space-y-2 text-sm text-muted-foreground font-medium">
+                                <li><a href="#" className="hover:text-primary transition-colors">{t("app.masterpieces")}</a></li>
+                                <li><a href="/analytics" className="hover:text-primary transition-colors">{t("nav.analytics")}</a></li>
+                            </ul>
+                        </div>
+                        <div className="space-y-4">
+                            <h4 className="font-bold text-foreground">Connect</h4>
+                            <ul className="space-y-2 text-sm text-muted-foreground font-medium">
+                                <li><a href="https://github.com/TrongSigmaPro" target="_blank" className="hover:text-primary transition-colors">GitHub</a></li>
+                                <li><a href="#" className="hover:text-primary transition-colors">LinkedIn</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-center gap-4">
                         <p className="text-sm text-muted-foreground">
-                            © {new Date().getFullYear()} MyProjects. Crafted by <span className="font-bold text-primary italic">TrongSigmaPro</span>.
+                            © {new Date().getFullYear()} MyProjects. Built by <span className="font-bold text-primary italic">TrongSigmaPro</span>.
                         </p>
+                        {/* <div className="flex items-center gap-6">
+                            <span className="text-[10px] font-black uppercase tracking-widest text-primary/50">One UI 6 Style</span>
+                        </div> */}
                     </div>
                 </div>
             </footer>

@@ -2,14 +2,16 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageToggle } from "./LanguageToggle";
-import { LayoutGrid, BarChart3, Menu, X, ChevronRight } from "lucide-react";
+import { LayoutGrid, BarChart3, Menu, X, ChevronRight, Download } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePWA } from "../hooks/usePWA";
 
 export function Navbar() {
     const { t } = useTranslation();
     const location = useLocation();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { isInstallable, installApp } = usePWA();
 
     const links = [
         { to: "/", icon: <LayoutGrid size={20} />, label: t("nav.home") },
@@ -23,8 +25,8 @@ export function Navbar() {
             <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <Link to="/" className="flex items-center gap-3 shrink-0 group">
-                        <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center bg-white dark:bg-zinc-900 shadow-md border border-primary/20 group-hover:scale-110 group-hover:shadow-primary/20 group-hover:border-primary/40 transition-all duration-500 p-1">
-                            <img src="/brand-logo.svg" alt="Logo" className="w-full h-full object-contain" />
+                        <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center bg-white shadow-md border border-primary/20 group-hover:scale-110 group-hover:shadow-primary/20 group-hover:border-primary/40 transition-all duration-500 p-1">
+                            <img src="/logo.svg" alt="Logo" className="w-full h-full object-contain" />
                         </div>
                         <span className="font-black text-xl tracking-tight gradient-text">{t("app.title")}</span>
                     </Link>
@@ -53,19 +55,49 @@ export function Navbar() {
                         ))}
                         <div className="h-4 w-[1px] bg-border mx-3" />
                         <div className="flex items-center gap-3">
+                            <AnimatePresence>
+                                {isInstallable && (
+                                    <motion.button
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.8 }}
+                                        onClick={installApp}
+                                        className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-lg shadow-primary/20 cursor-pointer"
+                                    >
+                                        <Download size={18} />
+                                        <span>{t("common.install")}</span>
+                                    </motion.button>
+                                )}
+                            </AnimatePresence>
                             <LanguageToggle />
                             <ThemeToggle />
                         </div>
                     </div>
 
                     {/* Mobile Menu Toggle */}
-                    <button
-                        onClick={toggleSidebar}
-                        className="flex md:hidden p-2 rounded-xl hover:bg-accent transition-colors"
-                        aria-label="Toggle Menu"
-                    >
-                        <Menu size={24} />
-                    </button>
+                    <div className="flex md:hidden items-center gap-2">
+                        <AnimatePresence>
+                            {isInstallable && (
+                                <motion.button
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    onClick={installApp}
+                                    className="p-2 rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                                    aria-label={t("common.install")}
+                                >
+                                    <Download size={20} />
+                                </motion.button>
+                            )}
+                        </AnimatePresence>
+                        <button
+                            onClick={toggleSidebar}
+                            className="p-2 rounded-xl hover:bg-accent transition-colors"
+                            aria-label="Toggle Menu"
+                        >
+                            <Menu size={24} />
+                        </button>
+                    </div>
                 </div>
             </nav>
 
@@ -89,8 +121,8 @@ export function Navbar() {
                         >
                             <div className="p-4 flex items-center justify-between border-b border-border">
                                 <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-white dark:bg-zinc-900 shadow-sm border border-primary/10 p-1">
-                                        <img src="/brand-logo.svg" alt="Logo" className="w-full h-full object-contain" />
+                                    <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-primary/10 p-1">
+                                        <img src="/logo.svg" alt="Logo" className="w-full h-full object-contain" />
                                     </div>
                                     <span className="font-black text-primary tracking-tight">{t("app.title")}</span>
                                 </div>
@@ -120,6 +152,22 @@ export function Navbar() {
                                         <ChevronRight size={18} className={location.pathname === link.to ? "opacity-100" : "opacity-30"} />
                                     </Link>
                                 ))}
+
+                                {isInstallable && (
+                                    <button
+                                        onClick={() => {
+                                            installApp();
+                                            toggleSidebar();
+                                        }}
+                                        className="mt-4 flex items-center justify-between px-4 py-4 rounded-2xl text-base font-bold transition-all bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <Download size={20} />
+                                            <span>{t("common.install")}</span>
+                                        </div>
+                                        <ChevronRight size={18} />
+                                    </button>
+                                )}
                             </div>
 
                             <div className="p-6 border-t border-border bg-accent/20">

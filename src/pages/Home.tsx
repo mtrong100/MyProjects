@@ -90,10 +90,10 @@ export function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.1]">
+                    <h1 className="text-6xl md:text-8xl font-black tracking-tight leading-[1] mb-8">
                         {t("app.explore")} <span className="gradient-text">{t("app.masterpieces")}</span>
                     </h1>
-                    <p className="text-muted-foreground text-lg md:text-xl mt-6 font-medium leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-muted-foreground text-xl md:text-2xl font-medium leading-relaxed max-w-3xl mx-auto">
                         {t("app.hero_text")}
                     </p>
                 </motion.div>
@@ -101,7 +101,7 @@ export function Home() {
 
             {/* Filter & Sort Controls (Non-sticky) */}
             <div className="space-y-6">
-                <div className="glass rounded-3xl p-6 shadow-2xl shadow-primary/5 border border-primary/10 flex flex-col gap-6">
+                <div className="bg-card rounded-3xl p-6 shadow-2xl shadow-primary/5 border border-primary/10 flex flex-col gap-6">
                     {/* Top Row: Search & Order */}
                     <div className="flex flex-col md:flex-row gap-4">
                         <div className="relative flex-1 group">
@@ -175,7 +175,7 @@ export function Home() {
                         </div>
 
                         {/* View Mode Toggle */}
-                        <div className="flex items-center gap-1 bg-background/50 p-1 rounded-xl border border-transparent overflow-hidden">
+                        <div className="grid grid-cols-3 items-center gap-1 bg-background/50 p-1 rounded-xl border border-transparent overflow-hidden">
                             {[
                                 { mode: "grid", icon: LayoutGrid, label: t("view.grid") },
                                 { mode: "compact", icon: Grid, label: t("view.compact") },
@@ -188,7 +188,7 @@ export function Home() {
                                     title={item.label}
                                 >
                                     <item.icon size={16} className="shrink-0" />
-                                    <span className="text-[10px] font-black uppercase hidden sm:inline-block md:hidden 2xl:inline-block whitespace-nowrap">{item.label}</span>
+                                    {/* <span className="text-[10px] font-black uppercase hidden sm:inline-block md:hidden 2xl:inline-block whitespace-nowrap">{item.label}</span> */}
                                 </button>
                             ))}
                         </div>
@@ -213,7 +213,7 @@ export function Home() {
                         exit={{ opacity: 0 }}
                         className={
                             viewMode === "grid"
-                                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+                                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
                                 : viewMode === "compact"
                                     ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
                                     : "flex flex-col gap-6"

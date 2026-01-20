@@ -9,7 +9,7 @@ import { useTheme } from "../hooks/useTheme";
 import { motion } from "framer-motion";
 import { TrendingUp, Award, Layers, Ghost, Target } from "lucide-react";
 
-const COLORS = ['#8b5cf6', '#6366f1', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#8b5cf6'];
+const COLORS = ['#10b981', '#34d399', '#059669', '#6ee7b7', '#047857', '#a7f3d0', '#065f46', '#10b981'];
 
 export function Analytics() {
     const { t } = useTranslation();
@@ -83,11 +83,11 @@ export function Analytics() {
 
     return (
         <div className="space-y-8 sm:space-y-12 pb-4">
-            <header className="space-y-4">
-                <h1 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight leading-tight">
+            <header className="space-y-6">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight leading-tight">
                     {t("nav.analytics")} <span className="gradient-text">{t("analytics.intelligence")}</span>
                 </h1>
-                <p className="text-muted-foreground text-base sm:text-lg max-w-xl font-medium">
+                <p className="text-muted-foreground text-lg sm:text-xl max-w-2xl font-medium">
                     {t("analytics.subtitle")}
                 </p>
             </header>
@@ -95,10 +95,10 @@ export function Analytics() {
             {/* Responsive Stats Grid */}
             <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 {[
-                    { label: t("analytics.total_artifacts"), value: projects.length, icon: Layers, color: "bg-blue-500" },
-                    { label: t("analytics.top_tech"), value: techData[0]?.name || "N/A", icon: Award, color: "bg-violet-500" },
-                    { label: t("analytics.ai_collab"), value: assistanceData.length, icon: TrendingUp, color: "bg-pink-500" },
-                    { label: t("analytics.velocity"), value: t("analytics.velocity_value"), icon: Ghost, color: "bg-amber-500" },
+                    { label: t("analytics.total_artifacts"), value: projects.length, icon: Layers, color: "bg-emerald-500" },
+                    { label: t("analytics.top_tech"), value: techData[0]?.name || "N/A", icon: Award, color: "bg-teal-500" },
+                    { label: t("analytics.ai_collab"), value: assistanceData.length, icon: TrendingUp, color: "bg-green-500" },
+                    { label: t("analytics.velocity"), value: t("analytics.velocity_value"), icon: Ghost, color: "bg-emerald-600" },
                 ].map((stat, i) => (
                     <motion.div
                         key={stat.label}

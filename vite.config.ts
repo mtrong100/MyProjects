@@ -10,33 +10,33 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['brand-logo.svg', 'favicon.svg', 'favicon.png', 'apple-touch-icon.png', 'og-image.png'],
+      includeAssets: ['logo.svg'],
       manifest: {
-        name: 'MyLabs — Premium Portfolio Ecosystem',
-        short_name: 'MyLabs',
+        name: 'MyProjects — Premium Portfolio Ecosystem',
+        short_name: 'MyProjects',
         description: 'A curated gallery of high-performance web applications and digital experiments.',
-        theme_color: '#09090b',
-        background_color: '#09090b',
+        theme_color: '#10b981',
+        background_color: '#fcfdfc',
         display: 'standalone',
         orientation: 'portrait',
         icons: [
           {
-            src: 'favicon.svg',
+            src: 'logo.svg',
             sizes: 'any',
             type: 'image/svg+xml',
             purpose: 'any'
           },
           {
-            src: 'brand-logo.svg',
-            sizes: '512x512',
-            type: 'image/svg+xml',
-            purpose: 'any'
-          },
-          {
-            src: 'favicon.svg',
+            src: 'logo.svg',
             sizes: '512x512',
             type: 'image/svg+xml',
             purpose: 'maskable'
+          },
+          {
+            src: 'logo.svg',
+            sizes: '192x192',
+            type: 'image/svg+xml',
+            purpose: 'any'
           }
         ]
       }

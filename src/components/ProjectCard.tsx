@@ -1,7 +1,8 @@
-import { ExternalLink, Github, Sparkles, Layout, Cpu } from "lucide-react";
+import { ExternalLink, Github, Sparkles, Layout, Cpu, Link } from "lucide-react";
 import type { Project } from "../types/index";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { useToast } from "../context/ToastContext";
 
 interface ProjectCardProps {
     project: Project;
@@ -10,7 +11,13 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
     const { t } = useTranslation();
+    const { showToast } = useToast();
     const techList = project.techUsed?.split(",").map((t) => t.trim()) || [];
+
+    const handleCopy = (link: string) => {
+        navigator.clipboard.writeText(link);
+        showToast(t("common.link_copied"), "success");
+    };
 
     if (variant === "compact") {
         return (
@@ -28,11 +35,20 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
                         <div className="flex items-center justify-center h-full text-muted-foreground/30"><Layout size={24} /></div>
                     )}
                 </div>
-                <div className="p-3">
-                    <h3 className="font-bold text-sm line-clamp-1 group-hover:text-primary transition-colors">{project.name}</h3>
+                <div className="p-4">
+                    <h3 className="font-bold text-base line-clamp-1 group-hover:text-primary transition-colors">{project.name}</h3>
                     <div className="mt-2 flex items-center justify-between">
                         <span className="text-[10px] text-muted-foreground font-medium">{techList[0]}</span>
                         <div className="flex gap-2">
+                            {project.demoLink && (
+                                <button
+                                    onClick={() => handleCopy(project.demoLink!)}
+                                    className="text-muted-foreground hover:text-primary cursor-pointer"
+                                    title={t("common.copy_link")}
+                                >
+                                    <Link size={12} />
+                                </button>
+                            )}
                             {project.demoLink && <a href={project.demoLink} target="_blank" className="text-muted-foreground hover:text-primary"><ExternalLink size={12} /></a>}
                             {project.sourceCode && <a href={project.sourceCode} target="_blank" className="text-muted-foreground hover:text-primary"><Github size={12} /></a>}
                         </div>
@@ -64,17 +80,25 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
                             <span className="px-3 py-1 rounded-full bg-primary/10 text-[10px] font-black text-primary uppercase border border-primary/20">{project.assistance}</span>
                         )}
                     </div>
-                    <p className="text-muted-foreground text-sm line-clamp-2 mb-4 max-w-2xl">{project.description}</p>
+                    <p className="text-muted-foreground text-base line-clamp-2 mb-4 max-w-2xl">{project.description}</p>
                     <div className="flex flex-wrap gap-2 mb-6">
                         {techList.map((tech) => (
                             <span key={tech} className="px-2.5 py-1 rounded-lg bg-secondary text-[10px] font-bold text-secondary-foreground border border-border/30">{tech}</span>
                         ))}
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-4">
                         {project.demoLink && (
                             <a href={project.demoLink} target="_blank" className="flex items-center gap-2 px-6 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-black shadow-lg shadow-primary/20 hover:-translate-y-0.5 transition-all">
                                 <ExternalLink size={16} /> {t("common.view_demo")}
                             </a>
+                        )}
+                        {project.demoLink && (
+                            <button
+                                onClick={() => handleCopy(project.demoLink!)}
+                                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border hover:bg-accent text-sm font-black transition-all cursor-pointer"
+                            >
+                                <Link size={18} /> {t("common.copy_link")}
+                            </button>
                         )}
                         {project.sourceCode && (
                             <a href={project.sourceCode} target="_blank" className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border hover:bg-accent text-sm font-black transition-all">
@@ -99,7 +123,7 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
             className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-lg hover:shadow-2xl hover:shadow-primary/10 transition-all h-full"
         >
             {/* Image Section */}
-            <div className="aspect-[16/10] overflow-hidden bg-muted relative">
+            <div className="aspect-video overflow-hidden bg-muted relative">
                 {project.image ? (
                     <img
                         src={project.image}
@@ -114,33 +138,33 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
                 )}
 
                 {/* Floating Tech Badge (First Tech) */}
-                {techList[0] && (
+                {/* {techList[0] && (
                     <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground backdrop-blur-md border border-white/20 text-[10px] font-black shadow-lg uppercase tracking-wider animate-pulse-soft">
                         {techList[0]}
                     </div>
-                )}
+                )} */}
 
                 {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end p-4">
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end p-4">
                     <p className="text-white text-xs font-bold tracking-wide">{t("common.explore_more")}</p>
-                </div>
+                </div> */}
             </div>
 
             {/* Content Section */}
             <div className="flex flex-1 flex-col p-6">
-                <div className="flex items-start justify-between mb-3">
-                    <h3 className="font-bold text-xl leading-tight group-hover:text-primary transition-colors line-clamp-1">
-                        {project.name}
-                    </h3>
+                <div className="flex flex-col items-start justify-between mb-3 gap-3">
                     {project.assistance && (
-                        <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-primary/20 to-primary/5 text-[10px] font-black text-primary uppercase border border-primary/20 shadow-sm">
-                            <Sparkles size={10} className="animate-pulse" />
+                        <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-primary/20 to-primary/5 text-[11px] font-black text-primary uppercase border border-primary/20 shadow-sm">
+                            <Sparkles size={11} className="animate-pulse" />
                             {project.assistance}
                         </span>
                     )}
+                    <h3 className="font-bold md:text-xl leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                        {project.name}
+                    </h3>
                 </div>
 
-                <p className="text-sm text-muted-foreground mb-6 line-clamp-2 leading-relaxed">
+                <p className="text-sm text-muted-foreground mb-6 line-clamp-3 leading-relaxed">
                     {project.description}
                 </p>
 
@@ -161,7 +185,7 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
                     )}
                 </div>
 
-                <div className="mt-auto flex items-center gap-3">
+                <div className="mt-auto flex items-center gap-2 lg:gap-3">
                     {project.demoLink && (
                         <a
                             href={project.demoLink}
@@ -172,6 +196,15 @@ export function ProjectCard({ project, variant = "grid" }: ProjectCardProps) {
                             <ExternalLink size={16} className="group-hover/btn:rotate-12 transition-transform" />
                             {t("common.view_demo")}
                         </a>
+                    )}
+                    {project.demoLink && (
+                        <button
+                            onClick={() => handleCopy(project.demoLink!)}
+                            className="flex items-center justify-center p-3 rounded-xl border border-border bg-background text-foreground hover:bg-accent hover:text-primary transition-all hover:border-primary/30 shadow-sm cursor-pointer"
+                            title={t("common.copy_link")}
+                        >
+                            <Link size={20} />
+                        </button>
                     )}
                     {project.sourceCode && project.sourceCode.startsWith('http') && (
                         <a
