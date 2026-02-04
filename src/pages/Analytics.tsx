@@ -8,6 +8,7 @@ import {
 import { useTheme } from "../hooks/useTheme";
 import { motion } from "framer-motion";
 import { TrendingUp, Award, Layers, Ghost, Target } from "lucide-react";
+import { StatSkeleton, ChartSkeleton } from "../components/Skeleton";
 
 const COLORS = ['#8b5cf6', '#a78bfa', '#7c3aed', '#c084fc', '#6d28d9', '#e879f9', '#4c1d95', '#8b5cf6'];
 
@@ -19,7 +20,7 @@ export function Analytics() {
     const techData = useMemo(() => {
         const counts: Record<string, number> = {};
         projects.forEach(p => {
-            p.techUsed?.split(',').forEach(t => {
+            p.tech?.split(',').forEach(t => {
                 const tech = t.trim();
                 counts[tech] = (counts[tech] || 0) + 1;
             });
@@ -33,8 +34,8 @@ export function Analytics() {
     const assistanceData = useMemo(() => {
         const counts: Record<string, number> = {};
         projects.forEach(p => {
-            if (p.assistance) {
-                p.assistance.split(',').map(h => h.trim()).forEach(h => {
+            if (p.AI) {
+                p.AI.split(',').map(h => h.trim()).forEach(h => {
                     counts[h] = (counts[h] || 0) + 1;
                 });
             }
@@ -50,7 +51,7 @@ export function Analytics() {
             "Frameworks": 0
         };
         projects.forEach(p => {
-            const tech = p.techUsed?.toLowerCase() || "";
+            const tech = p.tech?.toLowerCase() || "";
             if (tech.includes('react') || tech.includes('javascript')) categories["React/JS"]++;
             if (tech.includes('tailwind') || tech.includes('css')) categories["Styling"]++;
             if (tech.includes('typescript')) categories["Typings"]++;
@@ -62,13 +63,27 @@ export function Analytics() {
     const complexityData = useMemo(() => {
         return projects.map(p => ({
             name: p.name,
-            score: (p.techUsed?.split(',').length || 0) * 10 + (p.description?.length || 0) / 10
+            score: (p.tech?.split(',').length || 0) * 10 + (p.description?.length || 0) / 10
         })).sort((a, b) => b.score - a.score).slice(0, 8);
     }, [projects]);
 
     if (loading) return (
-        <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <div className="space-y-8 sm:space-y-12 pb-4">
+            <header className="space-y-6">
+                <div className="h-16 bg-muted rounded-2xl w-2/3 animate-pulse" />
+                <div className="h-6 bg-muted rounded-xl w-1/2 animate-pulse" />
+            </header>
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                {[1, 2, 3, 4].map((i) => (
+                    <StatSkeleton key={i} />
+                ))}
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                <ChartSkeleton />
+                <ChartSkeleton />
+                <ChartSkeleton />
+                <ChartSkeleton />
+            </div>
         </div>
     );
 

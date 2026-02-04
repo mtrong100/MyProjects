@@ -1,25 +1,25 @@
-# MyProjects 🚀
+# Project Tracker 🚀
 
-A high-performance, premium **Project Repository Ecosystem** built with React, Vite, and **Tailwind CSS v4**. Designed with a minimalist **One UI 6 Style** aesthetic and an **Emerald Green** brand identity.
+A high-performance, premium **Project Repository Ecosystem** built with React, Vite, and **Tailwind CSS v4**. Optimized for tracking and showcasing web applications, AI experiments, and modern digital architectures.
 
 📸 Screenshot
 ![Screenshot](./Screenshot.png)
 
 ## ✨ Premium Features
-- **One UI 6 Style Branding**: Minimalist, high-contrast UI with a custom Emerald Green visual language.
-- **Dynamic View Modes**: Switch between **Grid**, **List**, and **Compact** views to explore projects.
-- **PWA Excellence**: Fully installable as a native app on iOS, Android, and Desktop with offline capability.
-- **Advanced Repository Metrics**: Comprehensive analytics dashboard visualizing technical complexity and tech stack distribution.
-- **Live Search & Matrix Filtering**: Effortless navigation through technical layers and assistance models.
-- **Copy-to-Clipboard**: Quick-share links for every project with integrated **Toast Notifications**.
-- **Multilingual Core**: Full **i18n** support for English and Vietnamese.
-- **System-Aware Themes**: Fluid transitions between Light, Dark, and System theme preferences.
+- **Modern Brand Identity**: Sleek UI with a custom #8b5cf6 violet-to-purple gradient theme.
+- **Dynamic View Modes**: Seamlessly switch between **Grid**, **List**, and **Compact** views.
+- **PWA Excellence**: Fully installable as a native app on iOS, Android, and Desktop with offline sync.
+- **Advanced Repository Metrics**: Comprehensive analytics dashboard visualizing development velocity and tech distribution.
+- **Live Search & Matrix Filtering**: Fast navigation through complex project ecosystems.
+- **Copy-to-Clipboard**: Quick-share project links with integrated premium toast notifications.
+- **Multilingual Core**: Enterprise-grade **i18n** support (English & Vietnamese).
+- **Intelligent Themes**: Precision-crafted light and dark modes with system sync.
 
 ## 🛠️ Technical Engine
 - **Core**: React 19 + TypeScript
-- **Styling**: Tailwind CSS v4 (Modern JIT Engine)
-- **State Architecture**: Context-driven architecture for Toasts, Theme, and Repository data.
-- **Motion**: High-fidelity animations powered by Framer Motion.
+- **Styling**: Tailwind CSS v4 (JIT Engine)
+- **State**: Context-driven architecture for Toasts, Theme, and Data.
+- **Motion**: High-fidelity fluid animations powered by Framer Motion.
 - **Analytics**: Data visualization via Recharts.
 - **Infrastructure**: Vite 7 + Vite PWA Plugin.
 
@@ -28,7 +28,7 @@ A high-performance, premium **Project Repository Ecosystem** built with React, V
 1. **Clone & Initialize**
    ```bash
    git clone [repository-url]
-   cd MyProjects
+   cd Project-Tracker
    ```
 
 2. **Sync Dependencies**
@@ -47,18 +47,17 @@ A high-performance, premium **Project Repository Ecosystem** built with React, V
    ```
 
 ## 📦 Architecture Breakdown
-- `src/components`: Atomic UI components (Project cards, Dynamic Navbar, Footer).
-- `src/context`: Global application state (Toasts, i18n).
-- `src/hooks`: Custom logic hooks (Theme engine, PWA installation, Project sync).
-- `src/pages`: Feature-rich page layouts (Repository Hub, Analytics).
+- `src/components`: Atomic UI components (Project cards, Dynamic Navbar, Layout).
+- `src/i18n`: Global translation resources and configuration.
+- `src/context`: Application state management for premium features.
+- `src/hooks`: Custom logic for Theme switching, PWA sync, and Data fetching.
+- `src/pages`: Feature-rich page layouts (Project Hub, Analytics).
 
 ## 📱 PWA Integration
-The application is optimized for the **Vite PWA Plugin**. When hosted via HTTPS, users can "Install App" directly from the navigation bar. The app uses a customized `logo.svg` as the source for the app icon, ensuring high-fidelity rendering across mobile home screens.
+Project Tracker is fully PWA-ready. When accessed via HTTPS, it offers a "native-like" experience with a dedicated installer in the Navbar. The custom square logo ensures the app icon looks perfect on any device home screen.
 
 ## 🌐 Deployment
-Optimized for **Vercel** or **Netlify**:
-- **Build Command**: `npm run build`
-- **Output Directory**: `dist`
+Optimized for high-performance deployment on **Vercel** or **Netlify**.
 
 ---
-Built with precision by **TrongSigmaPro** 🌿
+Built with precision by **TrongSigmaPro** 💜

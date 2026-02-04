@@ -5,7 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
     en: {
         translation: {
-            "app.title": "MyProjects",
+            "app.title": "Project Tracker",
             "app.subtitle": "A premium hub showcasing my ecosystem of web applications, AI experiments, and front-end architectures.",
             "app.explore": "Project",
             "common.install": "Install App",
@@ -62,7 +62,7 @@ const resources = {
     },
     vi: {
         translation: {
-            "app.title": "MyProjects",
+            "app.title": "Project Tracker",
             "app.subtitle": "Trung tâm lưu trữ hệ sinh thái các ứng dụng web, thử nghiệm AI và kiến trúc front-end của tôi.",
             "app.explore": "Dự án",
             "common.install": "Cài đặt",
@@ -106,7 +106,7 @@ const resources = {
             "nav.analytics": "Thống kê",
             "common.loading": "Đang đồng bộ...",
             "common.error": "Lỗi hệ thống.",
-            "common.view_demo": "Xem trực tiếp",
+            "common.view_demo": "Xem demo",
             "common.source_code": "Mã nguồn",
             "common.assistance": "Xây dựng bởi",
             "common.projects_found": "Dự án được tìm thấy",

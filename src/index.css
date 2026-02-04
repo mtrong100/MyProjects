@@ -88,23 +88,27 @@
   body {
     @apply bg-background text-foreground transition-all duration-300 min-h-screen relative overflow-x-hidden antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
-    line-height: 1.6;
+    line-height: 1.5;
+
+    @screen sm {
+      line-height: 1.6;
+    }
   }
 
   h1 {
-    @apply text-4xl sm:text-5xl md:text-6xl font-black tracking-tight;
+    @apply text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight;
   }
 
   h2 {
-    @apply text-2xl sm:text-3xl font-black tracking-tight;
+    @apply text-xl sm:text-3xl font-black tracking-tight leading-snug;
   }
 
   h3 {
-    @apply text-xl font-bold tracking-tight;
+    @apply text-lg sm:text-xl font-bold tracking-tight leading-snug;
   }
 
   p {
-    @apply text-base text-muted-foreground;
+    @apply text-sm sm:text-base text-muted-foreground leading-relaxed;
   }
 
   /* Fixed Background Gradient using Standard CSS */

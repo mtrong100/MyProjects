@@ -12,8 +12,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['logo.svg'],
       manifest: {
-        name: 'MyProjects — Premium Portfolio Ecosystem',
-        short_name: 'MyProjects',
+        name: 'Project Tracker',
+        short_name: 'Project Tracker',
         description: 'A curated gallery of high-performance web applications and digital experiments.',
         theme_color: '#8b5cf6',
         background_color: '#fdfaff',

@@ -1,10 +1,11 @@
 export interface Project {
     name: string;
     description: string;
-    assistance: string;
-    techUsed: string;
-    sourceCode: string;
-    demoLink: string;
+    note: string;
+    AI: string;
+    tech: string;
+    source: string;
+    url: string;
     image: string;
 }
 

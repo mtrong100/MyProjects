@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { useProjects } from "../hooks/useProjects";
 import { ProjectCard } from "../components/ProjectCard";
+import { ProjectSkeleton } from "../components/Skeleton";
 import { Search, ArrowUpDown, Filter, X, Grid, List as ListIcon, LayoutGrid, ArrowUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { SortField, SortOrder, ViewMode } from "../types/index";
@@ -25,7 +26,7 @@ export function Home() {
     const techOptions = useMemo(() => {
         const techs = new Set<string>();
         projects.forEach((p) => {
-            p.techUsed?.split(",").forEach((t) => techs.add(t.trim()));
+            p.tech?.split(",").forEach((t) => techs.add(t.trim()));
         });
         return ["All", ...Array.from(techs).sort()];
     }, [projects]);
@@ -33,7 +34,7 @@ export function Home() {
     const assistanceOptions = useMemo(() => {
         const assistances = new Set<string>();
         projects.forEach((p) => {
-            if (p.assistance) p.assistance.split(",").forEach(a => assistances.add(a.trim()));
+            if (p.AI) p.AI.split(",").forEach(a => assistances.add(a.trim()));
         });
         return ["All", ...Array.from(assistances).sort()];
     }, [projects]);
@@ -44,9 +45,10 @@ export function Home() {
                 const matchesSearch =
                     p.name?.toLowerCase().includes(search.toLowerCase()) ||
                     p.description?.toLowerCase().includes(search.toLowerCase()) ||
-                    p.techUsed?.toLowerCase().includes(search.toLowerCase());
-                const matchesTech = techFilter === "All" || p.techUsed?.includes(techFilter);
-                const matchesAssistance = assistanceFilter === "All" || p.assistance?.includes(assistanceFilter);
+                    p.note?.toLowerCase().includes(search.toLowerCase()) ||
+                    p.tech?.toLowerCase().includes(search.toLowerCase());
+                const matchesTech = techFilter === "All" || p.tech?.includes(techFilter);
+                const matchesAssistance = assistanceFilter === "All" || p.AI?.includes(assistanceFilter);
                 return matchesSearch && matchesTech && matchesAssistance;
             })
             .sort((a, b) => {
@@ -56,8 +58,8 @@ export function Home() {
                     valA = (a.name || "").toLowerCase();
                     valB = (b.name || "").toLowerCase();
                 } else if (sortField === "techCount") {
-                    valA = a.techUsed?.split(",").length || 0;
-                    valB = b.techUsed?.split(",").length || 0;
+                    valA = a.tech?.split(",").length || 0;
+                    valB = b.tech?.split(",").length || 0;
                 } else if (sortField === "descriptionLength") {
                     valA = a.description?.length || 0;
                     valB = b.description?.length || 0;
@@ -72,10 +74,16 @@ export function Home() {
 
     if (loading) {
         return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                {[...Array(6)].map((_, i) => (
-                    <div key={i} className="aspect-[16/14] rounded-2xl bg-muted animate-pulse border border-border" />
-                ))}
+            <div className="space-y-12 pb-4">
+                <header className="text-center space-y-6 max-w-3xl mx-auto py-12">
+                    <div className="h-20 bg-muted rounded-2xl w-3/4 mx-auto animate-pulse mb-8" />
+                    <div className="h-6 bg-muted rounded-xl w-full mx-auto animate-pulse" />
+                </header>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {[...Array(6)].map((_, i) => (
+                        <ProjectSkeleton key={i} />
+                    ))}
+                </div>
             </div>
         );
     }
@@ -85,10 +93,10 @@ export function Home() {
             {/* Header Section */}
             <header className="text-center space-y-6 max-w-3xl mx-auto py-12">
                 <div>
-                    <h1 className="text-6xl md:text-8xl font-black tracking-tight leading-[1] mb-8">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight leading-[1.1] sm:leading-[1] mb-6 sm:mb-8">
                         {t("app.explore")} <span className="gradient-text">{t("app.masterpieces")}</span>
                     </h1>
-                    <p className="text-muted-foreground text-xl md:text-2xl font-medium leading-relaxed max-w-3xl mx-auto">
+                    <p className="text-base sm:text-xl md:text-2xl font-medium leading-relaxed max-w-3xl mx-auto">
                         {t("app.hero_text")}
                     </p>
                 </div>
@@ -172,8 +180,8 @@ export function Home() {
                         {/* View Mode Toggle */}
                         <div className="grid grid-cols-3 items-center gap-1 bg-background/50 p-1 rounded-xl border border-transparent overflow-hidden">
                             {[
-                                { mode: "grid", icon: LayoutGrid, label: t("view.grid") },
-                                { mode: "compact", icon: Grid, label: t("view.compact") },
+                                { mode: "grid", icon: LayoutGrid, label: "Grid 3" },
+                                { mode: "compact", icon: Grid, label: "Grid 4" },
                                 { mode: "list", icon: ListIcon, label: t("view.list") }
                             ].map((item) => (
                                 <button
@@ -204,9 +212,9 @@ export function Home() {
                     <div
                         className={
                             viewMode === "grid"
-                                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+                                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                                 : viewMode === "compact"
-                                    ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+                                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
                                     : "flex flex-col gap-6"
                         }
                     >
